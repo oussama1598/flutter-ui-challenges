@@ -2,18 +2,13 @@ import 'package:challenge_03/src/helpers/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class WorldClockItem extends StatelessWidget {
-  final String cityName;
+class TimerListItem extends StatelessWidget {
   final DateTime dateTime;
 
-  WorldClockItem({
+  TimerListItem({
     Key key,
-    int hours,
-    this.cityName,
-  })  : dateTime = DateTime.now().add(
-          Duration(hours: hours),
-        ),
-        super(key: key);
+    @required this.dateTime,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +20,7 @@ class WorldClockItem extends StatelessWidget {
         children: <Widget>[
           ListTile(
             title: Text(
-              cityName,
+              _buildTimeString(),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -40,12 +35,12 @@ class WorldClockItem extends StatelessWidget {
                 ),
               ),
             ),
-            trailing: Text(
-              _buildTimeString(),
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
+            trailing: IconButton(
+              icon: Icon(
+                Icons.close,
+                color: fadedWhite,
               ),
+              onPressed: () {},
             ),
           ),
           Divider(
@@ -59,7 +54,7 @@ class WorldClockItem extends StatelessWidget {
   }
 
   String _buildTimeString() {
-    return DateFormat('hh:kk').format(dateTime);
+    return DateFormat('hh:kk:ss').format(dateTime);
   }
 
   String _buildDateString() {

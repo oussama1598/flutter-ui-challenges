@@ -1,10 +1,25 @@
 import 'package:challenge_03/src/screens/alarms_page.dart';
+import 'package:challenge_03/src/screens/timer_page.dart';
 import 'package:challenge_03/src/screens/world_clocks_page.dart';
 import 'package:challenge_03/src/widgets/custom_tap_bar/custom_tap_bar.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  HomePage({Key key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  PageController _pageController;
+
+  @override
+  void initState() {
+    _pageController = PageController();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +30,7 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(15),
               child: CustomTapBar(
+                pageController: _pageController,
                 color: Theme.of(context).primaryColor.withOpacity(.4),
                 selectedBackgroundColor:
                     Theme.of(context).primaryColor.withOpacity(.05),
@@ -23,9 +39,11 @@ class HomePage extends StatelessWidget {
             ),
             Expanded(
               child: PageView(
+                controller: _pageController,
                 children: <Widget>[
-                  WorldClocksPage(),
                   AlarmsPage(),
+                  WorldClocksPage(),
+                  TimerPage(),
                 ],
               ),
             )
@@ -33,5 +51,12 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+
+    super.dispose();
   }
 }

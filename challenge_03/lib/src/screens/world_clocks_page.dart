@@ -1,3 +1,4 @@
+import 'package:challenge_03/src/widgets/clock/clock.dart';
 import 'package:challenge_03/src/widgets/world_clocks/world_clocks_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -18,9 +19,7 @@ class WorldClocksPage extends StatelessWidget {
             Expanded(
               child: AspectRatio(
                 aspectRatio: 1,
-                child: Container(
-                  color: Colors.red,
-                ),
+                child: Clock(),
               ),
             ),
             Expanded(
